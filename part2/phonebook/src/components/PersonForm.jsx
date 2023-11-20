@@ -1,4 +1,4 @@
-export function PersonForm({ name, phone, addPerson, onNameChange, onPhoneChange }) {
+export function PersonForm({ name, number, addPerson, onNameChange, onNumberChange }) {
   return (
     <form onSubmit={addPerson}>
       <div>
@@ -7,7 +7,7 @@ export function PersonForm({ name, phone, addPerson, onNameChange, onPhoneChange
       </div>
       <div>
         number:
-        <input value={phone} onChange={onPhoneChange} autoComplete='off' />
+        <input value={number} onChange={onNumberChange} autoComplete='off' />
       </div>
       <div>
         <button type="submit">add</button>
