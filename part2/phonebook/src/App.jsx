@@ -15,6 +15,9 @@ function App() {
     personService
       .getAll()
       .then(initialPersons => setPersons(initialPersons))
+      .catch(error => {
+        console.log('There was a problem with the request: ', error)
+      })
   }, [])
 
   const handleNameChange = (event) => setNewName(event.target.value)
@@ -49,6 +52,9 @@ function App() {
             setNewName('')
             setNewNumber('')
           })
+          .catch(error => {
+            console.log('There was a problem with the request: ', error)
+          })
       }
 
       return
@@ -61,6 +67,9 @@ function App() {
         setNewName('')
         setNewNumber('')
       })
+      .catch(error => {
+        console.log('There was a problem with the request: ', error)
+      })
 
   }
 
@@ -70,6 +79,9 @@ function App() {
       personService
         .remove(id)
         .then(() => setPersons(persons.filter(person => person.id !== id)))
+        .catch(error => {
+          console.log('There was a problem with the request: ', error)
+        })
     }
   }
 
