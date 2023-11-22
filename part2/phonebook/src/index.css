@@ -1,0 +1,13 @@
+.message {
+  padding: 12px;
+  color: rgb(0, 196, 0);
+  border: 4px solid rgb(0, 196, 0);
+  margin-bottom: 16px;
+  background-color: lightgray;
+  font-size: 20px;
+}
+
+.error {
+  color: rgb(167, 0, 0);
+  border: 4px solid rgb(167, 0, 0);
+}

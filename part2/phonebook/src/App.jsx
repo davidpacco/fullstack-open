@@ -4,12 +4,15 @@ import personService from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 
 function App() {
   const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
+  const [message, setMessage] = useState(null)
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     personService
@@ -49,11 +52,19 @@ function App() {
           .update(id, personObject)
           .then(returnedPerson => {
             setPersons(persons.map(person => person.id !== id ? person : returnedPerson))
+            setMessage(`Updated ${returnedPerson.name}`)
+            setTimeout(() => setMessage(null), 5000)
             setNewName('')
             setNewNumber('')
           })
-          .catch(error => {
-            console.log('There was a problem with the request: ', error)
+          .catch(() => {
+            setMessage(`Information of ${name} has already been removed from server`)
+            setIsError(true)
+            setTimeout(() => {
+              setMessage(null)
+              setIsError(false)
+            }, 5000)
+            setPersons(persons.filter(person => person.id !== id))
           })
       }
 
@@ -64,6 +75,8 @@ function App() {
       .addNew(personObject)
       .then(returnedPerson => {
         setPersons(persons.concat(returnedPerson))
+        setMessage(`Added ${returnedPerson.name}`)
+        setTimeout(() => setMessage(null), 5000)
         setNewName('')
         setNewNumber('')
       })
@@ -88,6 +101,8 @@ function App() {
   return (
     <div>
       <h2>Phonebook</h2>
+
+      <Notification message={message} isError={isError} />
 
       <Filter filter={filter} handleFilter={handleFilter} />
 
