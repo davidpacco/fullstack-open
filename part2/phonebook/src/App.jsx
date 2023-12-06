@@ -82,6 +82,12 @@ function App() {
       })
       .catch(error => {
         console.log('There was a problem with the request: ', error)
+        setMessage(error.response.data.error)
+        setIsError(true)
+        setTimeout(() => {
+          setMessage(null)
+          setIsError(false)
+        }, 5000)
       })
 
   }

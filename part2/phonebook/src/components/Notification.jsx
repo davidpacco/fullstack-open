@@ -4,7 +4,6 @@ function Notification({ message, isError }) {
   }
 
   const styles = isError ? 'message error' : 'message'
-  console.log(styles)
 
   return (
     <div className={styles}>{message}</div>
